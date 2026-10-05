@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abriendo App...</title>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const casa = params.get('c');
+    
+    // Protocolos internos de las apps en iOS
+    const esquemas = {
+      'winamax': 'winamax://',
+      'bwin': 'bwin://',
+      'betfair': 'betfair://',
+      'betway': 'betway://',
+      'williamhill': 'williamhill://'
+    };
+
+    if (esquemas[casa]) {
+      window.location.href = esquemas[casa];
+    }
+  </script>
+</head>
+<body style="font-family: sans-serif; text-align: center; padding-top: 50px;">
+  <p>Abriendo la aplicación en tu iPhone...</p>
+</body>
+</html>
