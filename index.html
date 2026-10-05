@@ -6,7 +6,7 @@
   <title>Abriendo App...</title>
   <style>
     body { font-family: -apple-system, sans-serif; text-align: center; padding: 40px 20px; background: #f2f2f7; }
-    .card { background: white; padding: 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .card { background: white; padding: 24px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); max-width: 360px; margin: auto; }
     .btn { display: inline-block; padding: 14px 28px; background: #007aff; color: white; border-radius: 10px; text-decoration: none; font-size: 17px; font-weight: 600; margin-top: 15px; }
   </style>
 </head>
@@ -20,28 +20,20 @@
   <script>
     const params = new URLSearchParams(window.location.search);
     const casa = params.get('c');
-    
-    const config = {
-      'winamax': { scheme: 'winamax://', web: 'https://www.winamax.es/paris-sportifs' },
-      'bwin': { scheme: 'bwin://', web: 'https://sports.bwin.es/es/sports' },
-      'betfair': { scheme: 'betfair://', web: 'https://www.betfair.es/sport/' },
-      'betway': { scheme: 'betway://', web: 'https://betway.es/es/sports' }
+
+    // Protocolos directos de Atajos de iOS
+    const atajos = {
+      'winamax': 'shortcuts://run-shortcut?name=Winamax',
+      'bwin': 'shortcuts://run-shortcut?name=Bwin',
+      'betfair': 'shortcuts://run-shortcut?name=Betfair',
+      'betway': 'shortcuts://run-shortcut?name=Betway'
     };
 
-    if (config[casa]) {
-      const appUrl = config[casa].scheme;
-      const webUrl = config[casa].web;
-      
-      const boton = document.getElementById('btnApp');
-      boton.href = appUrl;
-
-      // 1. Intento de salto automático
-      window.location.href = appUrl;
-
-      // 2. Si la app no abre en 2 segundos, redirige a la web para no dejar la pantalla en blanco
-      setTimeout(() => {
-        window.location.href = webUrl;
-      }, 2000);
+    if (atajos[casa]) {
+      const urlAtajo = atajos[casa];
+      document.getElementById('btnApp').href = urlAtajo;
+      // Salto automático inmediato
+      window.location.href = urlAtajo;
     }
   </script>
 </body>
